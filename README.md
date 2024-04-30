@@ -2,15 +2,15 @@
   <img src="https://imgur.com/yMuZdvu.gif">
 </div>
 
-With this plugin you can
-Change the size of any Living entity (bigger & smaller)
-with an optional steps for a transition
+With this plugin, you can:
+Change the size of any living entity (bigger & smaller)
+with optional steps for a transition.
 
-Modify it for entities or players with a specific name, uuid, entity id, scoreboard tag or even the entity you are looking at or entities in a specific range around you!
+Modify it for entities or players with a specific name, UUID, entity ID, scoreboard tag, the entity you are looking at, or entities in a specific range around you!
 
-There area also some other optional modifiers like:
-Movement speed, jump strenth, step height etc. (Look into the config)
-To make it more playable for a player with a different scale.​
+There are also some other optional modifiers like:
+Movement speed, jump strength, step height, etc. (Look into the config)
+To make it more playable for a player with a different scale.
 
 # Commands
 
