@@ -45,7 +45,7 @@ public final class EntitySize extends JavaPlugin {
         if(currentScale == newScale) return;
         boolean bigger = newScale > currentScale;
         if(this.configuration.isTransition()) {
-            double stepSize = Math.abs(newScale - currentScale) / 20;
+            double stepSize = Math.abs(newScale - currentScale) / configuration.getTransitionSteps();
             AtomicReference<Double> scale = new AtomicReference<>(currentScale);
             getServer().getScheduler().runTaskTimer(this, task -> {
                 scale.updateAndGet(v -> bigger ? v + stepSize : v - stepSize);

@@ -19,10 +19,12 @@ public class Config {
     private boolean speedMultiplier;
     private boolean jumpMultiplier;
     private boolean saveFallDistanceMultiplier;
+    private int transitionSteps;
 
     public Config() {
         setDefault("General.bStats", true);
         setDefault("Size.Transition", true);
+        setDefault("Size.TransitionSteps", 30);
         setDefault("Size.ReachMultiplier", true);
         setDefault("Size.StepHeightMultiplier", true);
         setDefault("Size.SpeedMultiplier", true);
@@ -40,6 +42,7 @@ public class Config {
         this.speedMultiplier = cfg.getBoolean("Size.SpeedMultiplier");
         this.jumpMultiplier = cfg.getBoolean("Size.JumpMultiplier");
         this.saveFallDistanceMultiplier = cfg.getBoolean("Size.SaveFallDistanceMultiplier");
+        this.transitionSteps = cfg.getInt("Size.TransitionSteps");
     }
 
     public void reload() {
