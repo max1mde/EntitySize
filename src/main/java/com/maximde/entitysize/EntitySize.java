@@ -41,7 +41,7 @@ public final class EntitySize extends JavaPlugin {
     }
 
     public void setSize(LivingEntity livingEntity, double newScale) {
-        double currentScale = Objects.requireNonNull(livingEntity.getAttribute(Attribute.GENERIC_SCALE)).getBaseValue();
+        final double currentScale = Objects.requireNonNull(livingEntity.getAttribute(Attribute.GENERIC_SCALE)).getBaseValue();
         if(currentScale == newScale) return;
         boolean bigger = newScale > currentScale;
         if(this.configuration.isTransition()) {
@@ -49,10 +49,11 @@ public final class EntitySize extends JavaPlugin {
             AtomicReference<Double> scale = new AtomicReference<>(currentScale);
             getServer().getScheduler().runTaskTimer(this, task -> {
                 scale.updateAndGet(v -> bigger ? v + stepSize : v - stepSize);
-                Objects.requireNonNull(livingEntity.getAttribute(Attribute.GENERIC_SCALE)).setBaseValue(scale.get());
+                if(scale.get() == currentScale) return;
                 if ((bigger && scale.get() >= newScale) || (!bigger && scale.get() <= newScale)) {
                     task.cancel();
                 }
+                Objects.requireNonNull(livingEntity.getAttribute(Attribute.GENERIC_SCALE)).setBaseValue(scale.get());
             }, 0, 1);
         } else {
             if (livingEntity.getAttribute(Attribute.GENERIC_SCALE) != null) {
