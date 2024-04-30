@@ -31,6 +31,7 @@ General:
   bStats: true
 Size:
   Transition: true
+  TransitionSteps: 30
   ReachMultiplier: true
   StepHeightMultiplier: true
   SpeedMultiplier: true
