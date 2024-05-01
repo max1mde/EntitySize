@@ -11,7 +11,6 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
-import org.bukkit.util.Vector;
 
 import java.util.*;
 import java.util.function.Predicate;
@@ -85,7 +84,6 @@ public class EntitySizeCommand implements CommandExecutor, TabCompleter {
             sendCommands(sender);
             return;
         }
-
 
         double size = Double.parseDouble(args[3]);
 
@@ -192,21 +190,13 @@ public class EntitySizeCommand implements CommandExecutor, TabCompleter {
         }
 
         if (args.length == 3) {
-            if(args[0].equalsIgnoreCase("player")) {
-                commands.add("<size>");
-            }
+            if(args[0].equalsIgnoreCase("player")) commands.add("<size>");
             if(args[0].equalsIgnoreCase("entity")) {
-                if(args[1].equalsIgnoreCase("tag")) {
-                    commands.add("<tag>");
-                }
-                if(args[1].equalsIgnoreCase("name")) {
-                    commands.add("<name>");
-                }
-                if(args[1].equalsIgnoreCase("uuid")) {
-                    commands.add("<uuid>");
-                }
-                if(args[1].equalsIgnoreCase("range")) {
-                    commands.add("<range>");
+                switch (args[1].toLowerCase()) {
+                    case "tag" -> commands.add("<tag>");
+                    case "name" -> commands.add("<name>");
+                    case "uuid" -> commands.add("<uuid>");
+                    case "range" -> commands.add("<range>");
                 }
             }
             StringUtil.copyPartialMatches(args[2], commands, completions);

@@ -29,9 +29,7 @@ public final class EntitySize extends JavaPlugin {
     @Override
     public void onEnable() {
         this.configuration = new Config();
-        if(configuration.isBStats()) {
-            new Metrics(this, 21739);
-        }
+        if(configuration.isBStats()) new Metrics(this, 21739);
         Objects.requireNonNull(getCommand("entitysize")).setExecutor(new EntitySizeCommand(this));
         Objects.requireNonNull(getCommand("entitysize")).setTabCompleter(new EntitySizeCommand(this));
     }
