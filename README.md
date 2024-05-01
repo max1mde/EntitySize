@@ -1,7 +1,18 @@
 <div align="center">
-  <img src="https://imgur.com/yMuZdvu.gif">
-</div>
 
+  <p><b>Supported versions: </b>1.20.5, 1.20.6</p>
+  
+  <img width="600" src="https://github.com/max1mde/EntitySize/assets/114857048/cdbf1c35-155c-4481-8f44-4f097c2c7a86"> <br>
+  <img src="https://imgur.com/yMuZdvu.gif">
+  
+<br>
+<br>
+
+<img src="https://github.com/max1mde/EntitySize/assets/114857048/2288ecc1-2ed8-4e8e-814e-d4923d57bb0e">
+
+<br>
+
+<p>
 With this plugin, you can:
 Change the size of any living entity (bigger & smaller)
 with optional steps for a transition.
@@ -11,6 +22,10 @@ Modify it for entities or players with a specific name, UUID, entity ID, scorebo
 There are also some other optional modifiers like:
 Movement speed, jump strength, step height, etc. (Look into the config)
 To make it more playable for a player with a different scale.
+</p>
+
+  
+</div>
 
 # Commands
 
@@ -31,6 +46,7 @@ General:
   bStats: true
 Size:
   Transition: true
+  TransitionSteps: 30
   ReachMultiplier: true
   StepHeightMultiplier: true
   SpeedMultiplier: true
