@@ -30,14 +30,14 @@ To make it more playable for a player with a different scale.
 # Commands
 
 ```
-/size reload
-/size <size> (Change your own size)
-/size player <player> <size>
-/size entity looking <size> (The entity you are looking at)
-/size entity tag <size> (All entities with a specific scoreboard tag)
-/size entity name <size> (All entities with a specific name)
-/size entity uuid <size> (Entity with that uuid)
-/size entity range <blocks> <size> (Entities in a specific range from your location)
+/entitysize reload
+/entitysize <size> (Change your own size)
+/entitysize player <player> <size>
+/entitysize entity looking <size> (The entity you are looking at)
+/entitysize entity tag <size> (All entities with a specific scoreboard tag)
+/entitysize entity name <size> (All entities with a specific name)
+/entitysize entity uuid <size> (Entity with that uuid)
+/entitysize entity range <blocks> <size> (Entities in a specific range from your location)
 ```
 
 # Config
