@@ -2,7 +2,6 @@ package com.maximde.entitysize.commands;
 
 import com.maximde.entitysize.EntitySize;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -152,14 +151,14 @@ public class EntitySizeCommand implements CommandExecutor, TabCompleter {
 
     private boolean sendCommands(CommandSender sender) {
         sender.sendMessage(entitySize.getPrimaryColor() +
-                "/size reload (Reload config)\n" +
-                "/size <size> (Change your own size)\n" +
-                "/size player <player size>\n" +
-                "/size entity looking (The entity you are looking at)\n" +
-                "/size entity tag (All entities with a specific scoreboard tag)\n" +
-                "/size entity name (All entities with a specific name)\n" +
-                "/size entity uuid (Entity with that uuid)\n" +
-                "/size entity range <blocks> (Entities in a specific range from your location)\n");
+                "/entitysize reload (Reload config)\n" +
+                "/entitysize <size> (Change your own size)\n" +
+                "/entitysize player <player size>\n" +
+                "/entitysize entity looking (The entity you are looking at)\n" +
+                "/entitysize entity tag (All entities with a specific scoreboard tag)\n" +
+                "/entitysize entity name (All entities with a specific name)\n" +
+                "/entitysize entity uuid (Entity with that uuid)\n" +
+                "/entitysize entity range <blocks> (Entities in a specific range from your location)\n");
         return false;
     }
 
@@ -176,7 +175,7 @@ public class EntitySizeCommand implements CommandExecutor, TabCompleter {
 
 
         if (args.length == 1) {
-            commands.addAll(Arrays.asList(ChatColor.ITALIC + "<size>", "reload", "player", "entity"));
+            commands.addAll(Arrays.asList("<size>", "reload", "player", "entity"));
             StringUtil.copyPartialMatches(args[0], commands, completions);
         }
 
@@ -187,27 +186,27 @@ public class EntitySizeCommand implements CommandExecutor, TabCompleter {
                 });
             }
             if(args[0].equalsIgnoreCase("entity")) {
-                commands.addAll(Arrays.asList(entitySize.getPrimaryColor() + "looking", "tag", "name", "range"));
+                commands.addAll(Arrays.asList("looking", "tag", "name", "range"));
             }
             StringUtil.copyPartialMatches(args[1], commands, completions);
         }
 
         if (args.length == 3) {
             if(args[0].equalsIgnoreCase("player")) {
-                commands.add(ChatColor.ITALIC + "<size>");
+                commands.add("<size>");
             }
             if(args[0].equalsIgnoreCase("entity")) {
                 if(args[1].equalsIgnoreCase("tag")) {
-                    commands.add(ChatColor.ITALIC + "<tag>");
+                    commands.add("<tag>");
                 }
                 if(args[1].equalsIgnoreCase("name")) {
-                    commands.add(ChatColor.ITALIC + "<name>");
+                    commands.add("<name>");
                 }
                 if(args[1].equalsIgnoreCase("uuid")) {
-                    commands.add(ChatColor.ITALIC + "<uuid>");
+                    commands.add("<uuid>");
                 }
                 if(args[1].equalsIgnoreCase("range")) {
-                    commands.add(ChatColor.ITALIC + "<range>");
+                    commands.add("<range>");
                 }
             }
             StringUtil.copyPartialMatches(args[2], commands, completions);
@@ -215,7 +214,7 @@ public class EntitySizeCommand implements CommandExecutor, TabCompleter {
 
         if (args.length == 4) {
             if(args[0].equalsIgnoreCase("entity")) {
-                commands.add(ChatColor.ITALIC + "<size>");
+                commands.add("<size>");
             }
             StringUtil.copyPartialMatches(args[3], commands, completions);
         }
