@@ -80,15 +80,16 @@ public class EntitySizeCommand implements CommandExecutor, TabCompleter {
     }
 
     private void handleEntityArg(CommandSender sender, String[] args) {
-        if (args.length < 4) {
+        if (args.length < 3) {
             sendCommands(sender);
             return;
         }
 
-        double size = Double.parseDouble(args[3]);
-
         switch (args[1].toLowerCase()) {
             case "looking" -> {
+
+                double size = Double.parseDouble(args[2]);
+
                 if(!(sender instanceof Player player)) {
                     sender.sendMessage(entitySize.getPrimaryColor() + "You can only execute this command as a player!");
                     return;
@@ -105,27 +106,47 @@ public class EntitySizeCommand implements CommandExecutor, TabCompleter {
                 sender.sendMessage(entitySize.getPrimaryColor() + "Success!");
             }
             case "tag" -> {
+                if (args.length < 4) {
+                    sendCommands(sender);
+                    return;
+                }
                 String tag = args[2];
+                double size = Double.parseDouble(args[3]);
                 handleEntities(entity -> entity.getScoreboardTags().contains(tag), size);
                 sender.sendMessage(entitySize.getPrimaryColor() + "Success!");
             }
             case "name" -> {
+                if (args.length < 4) {
+                    sendCommands(sender);
+                    return;
+                }
                 String name = args[2];
+                double size = Double.parseDouble(args[3]);
                 handleEntities(entity -> (entity.getCustomName() != null && entity.getCustomName().equalsIgnoreCase(name)) || entity.getName().equalsIgnoreCase(name), size);
                 sender.sendMessage(entitySize.getPrimaryColor() + "Success!");
             }
             case "uuid" -> {
+                if (args.length < 4) {
+                    sendCommands(sender);
+                    return;
+                }
                 UUID uuid = UUID.fromString(args[2]);
+                double size = Double.parseDouble(args[3]);
                 handleEntities(entity -> entity.getUniqueId().equals(uuid), size);
                 sender.sendMessage(entitySize.getPrimaryColor() + "Success!");
             }
             case "range" -> {
+                if (args.length < 4) {
+                    sendCommands(sender);
+                    return;
+                }
                 if(!(sender instanceof Player player)) {
                     sender.sendMessage(entitySize.getPrimaryColor() + "You can only execute this command as a player!");
                     return;
                 }
 
                 double range = Double.parseDouble(args[2]);
+                double size = Double.parseDouble(args[3]);
                 handleEntities(entity -> isWithinRange(entity, player, range), size);
                 sender.sendMessage(entitySize.getPrimaryColor() + "Success!");
             }
@@ -195,18 +216,12 @@ public class EntitySizeCommand implements CommandExecutor, TabCompleter {
                 switch (args[1].toLowerCase()) {
                     case "tag" -> commands.add("<tag>");
                     case "name" -> commands.add("<name>");
+                    case "looking" -> commands.add("<size>");
                     case "uuid" -> commands.add("<uuid>");
                     case "range" -> commands.add("<range>");
                 }
             }
             StringUtil.copyPartialMatches(args[2], commands, completions);
-        }
-
-        if (args.length == 4) {
-            if(args[0].equalsIgnoreCase("entity")) {
-                commands.add("<size>");
-            }
-            StringUtil.copyPartialMatches(args[3], commands, completions);
         }
 
         return completions;
