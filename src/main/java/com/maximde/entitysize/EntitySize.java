@@ -62,7 +62,7 @@ public final class EntitySize extends JavaPlugin {
         if (this.configuration.isJumpMultiplier()) {
             if (livingEntity.getAttribute(Attribute.GENERIC_JUMP_STRENGTH) != null) {
                 livingEntity.getAttribute(Attribute.GENERIC_JUMP_STRENGTH).setBaseValue(getValidBase(0.41D, 32, newScale * configuration.getJumpMultiplier()));
-                livingEntity.getAttribute(Attribute.GENERIC_JUMP_STRENGTH).setBaseValue(Math.max(getValidBase(0.41D, 32, (newScale > 1 ? newScale / 2 : newScale) * configuration.getJumpMultiplier()), 0.2));
+                livingEntity.getAttribute(Attribute.GENERIC_JUMP_STRENGTH).setBaseValue(Math.max(getValidBase(0.41D, 32, newScale * configuration.getJumpMultiplier()), 0.2));
             }
         }
         if (this.configuration.isReachMultiplier()) {
@@ -75,7 +75,7 @@ public final class EntitySize extends JavaPlugin {
         }
         if (this.configuration.isSpeedMultiplier()) {
             if (livingEntity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED) != null) {
-                livingEntity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(Math.max(getValidBase(0.1D, 1024, (newScale > 1 ? newScale / 2 : newScale) * configuration.getSpeedMultiplier()), 0.03));
+                livingEntity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(Math.max(getValidBase(0.1D, 1024, newScale * configuration.getSpeedMultiplier()), 0.03));
             }
         }
         if (this.configuration.isStepHeightMultiplier()) {

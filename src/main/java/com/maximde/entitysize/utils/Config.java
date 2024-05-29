@@ -21,11 +21,11 @@ public class Config {
     private boolean isSaveFallDistanceMultiplier;
     private int transitionSteps;
 
-    private int reachMultiplier;
-    private int stepHeightMultiplier;
-    private int speedMultiplier;
-    private int jumpMultiplier;
-    private int saveFallDistanceMultiplier;
+    private double reachMultiplier;
+    private double stepHeightMultiplier;
+    private double speedMultiplier;
+    private double jumpMultiplier;
+    private double saveFallDistanceMultiplier;
 
     public Config() {
         setDefault("General.bStats", true);
@@ -55,11 +55,11 @@ public class Config {
         this.isJumpMultiplier = cfg.getBoolean("Size.IsJumpMultiplier");
         this.isSaveFallDistanceMultiplier = cfg.getBoolean("Size.IsSaveFallDistanceMultiplier");
 
-        this.reachMultiplier = cfg.getInt("Size.ReachMultiplier");
-        this.stepHeightMultiplier = cfg.getInt("Size.StepHeightMultiplier");
-        this.speedMultiplier = cfg.getInt("Size.SpeedMultiplier");
-        this.jumpMultiplier = cfg.getInt("Size.JumpMultiplier");
-        this.saveFallDistanceMultiplier = cfg.getInt("Size.SaveFallDistanceMultiplier");
+        this.reachMultiplier = cfg.getDouble("Size.ReachMultiplier");
+        this.stepHeightMultiplier = cfg.getDouble("Size.StepHeightMultiplier");
+        this.speedMultiplier = cfg.getDouble("Size.SpeedMultiplier");
+        this.jumpMultiplier = cfg.getDouble("Size.JumpMultiplier");
+        this.saveFallDistanceMultiplier = cfg.getDouble("Size.SaveFallDistanceMultiplier");
 
         this.transitionSteps = cfg.getInt("Size.TransitionSteps");
     }
