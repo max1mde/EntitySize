@@ -2,7 +2,6 @@
 
   <p><b>Supported versions: </b>1.20.5, 1.20.6</p>
   
-  <img width="600" src="https://github.com/max1mde/EntitySize/assets/114857048/cdbf1c35-155c-4481-8f44-4f097c2c7a86"> <br>
   <img src="https://imgur.com/yMuZdvu.gif">
   
 <br>
