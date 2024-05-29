@@ -61,32 +61,32 @@ public final class EntitySize extends JavaPlugin {
 
         if (this.configuration.isJumpMultiplier()) {
             if (livingEntity.getAttribute(Attribute.GENERIC_JUMP_STRENGTH) != null) {
-                livingEntity.getAttribute(Attribute.GENERIC_JUMP_STRENGTH).setBaseValue(getValidBase(0.41D, 32, newScale));
-                livingEntity.getAttribute(Attribute.GENERIC_JUMP_STRENGTH).setBaseValue(Math.max(getValidBase(0.41D, 32, newScale > 1 ? newScale / 2 : newScale), 0.2));
+                livingEntity.getAttribute(Attribute.GENERIC_JUMP_STRENGTH).setBaseValue(getValidBase(0.41D, 32, newScale * configuration.getJumpMultiplier()));
+                livingEntity.getAttribute(Attribute.GENERIC_JUMP_STRENGTH).setBaseValue(Math.max(getValidBase(0.41D, 32, (newScale > 1 ? newScale / 2 : newScale) * configuration.getJumpMultiplier()), 0.2));
             }
         }
         if (this.configuration.isReachMultiplier()) {
             if (livingEntity.getAttribute(Attribute.PLAYER_BLOCK_INTERACTION_RANGE) != null) {
-                livingEntity.getAttribute(Attribute.PLAYER_BLOCK_INTERACTION_RANGE).setBaseValue(getValidBase(4.5D, 64, newScale));
+                livingEntity.getAttribute(Attribute.PLAYER_BLOCK_INTERACTION_RANGE).setBaseValue(getValidBase(4.5D, 64, newScale * configuration.getReachMultiplier()));
             }
             if (livingEntity.getAttribute(Attribute.PLAYER_ENTITY_INTERACTION_RANGE) != null) {
-                livingEntity.getAttribute(Attribute.PLAYER_ENTITY_INTERACTION_RANGE).setBaseValue(getValidBase(3D, 64, newScale));
+                livingEntity.getAttribute(Attribute.PLAYER_ENTITY_INTERACTION_RANGE).setBaseValue(getValidBase(3D, 64, newScale * configuration.getReachMultiplier()));
             }
         }
         if (this.configuration.isSpeedMultiplier()) {
             if (livingEntity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED) != null) {
-                livingEntity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(Math.max(getValidBase(0.1D, 1024, newScale > 1 ? newScale / 2 : newScale), 0.03));
+                livingEntity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(Math.max(getValidBase(0.1D, 1024, (newScale > 1 ? newScale / 2 : newScale) * configuration.getSpeedMultiplier()), 0.03));
             }
         }
         if (this.configuration.isStepHeightMultiplier()) {
             if (livingEntity.getAttribute(Attribute.GENERIC_STEP_HEIGHT) != null) {
-                livingEntity.getAttribute(Attribute.GENERIC_STEP_HEIGHT).setBaseValue(getValidBase(0.6D, 10, newScale));
+                livingEntity.getAttribute(Attribute.GENERIC_STEP_HEIGHT).setBaseValue(getValidBase(0.6D, 10, newScale * configuration.getStepHeightMultiplier()));
             }
         }
 
         if (this.configuration.isSaveFallDistanceMultiplier()) {
             if (livingEntity.getAttribute(Attribute.GENERIC_SAFE_FALL_DISTANCE) != null) {
-                livingEntity.getAttribute(Attribute.GENERIC_SAFE_FALL_DISTANCE).setBaseValue(getValidBase(3.0D, 1024, newScale));
+                livingEntity.getAttribute(Attribute.GENERIC_SAFE_FALL_DISTANCE).setBaseValue(getValidBase(3.0D, 1024, newScale * configuration.getSaveFallDistanceMultiplier()));
             }
         }
     }

@@ -14,22 +14,34 @@ public class Config {
     private YamlConfiguration cfg = YamlConfiguration.loadConfiguration(file);
     private boolean bStats;
     private boolean transition;
-    private boolean reachMultiplier;
-    private boolean stepHeightMultiplier;
-    private boolean speedMultiplier;
-    private boolean jumpMultiplier;
-    private boolean saveFallDistanceMultiplier;
+    private boolean isReachMultiplier;
+    private boolean isStepHeightMultiplier;
+    private boolean isSpeedMultiplier;
+    private boolean isJumpMultiplier;
+    private boolean isSaveFallDistanceMultiplier;
     private int transitionSteps;
+
+    private int reachMultiplier;
+    private int stepHeightMultiplier;
+    private int speedMultiplier;
+    private int jumpMultiplier;
+    private int saveFallDistanceMultiplier;
 
     public Config() {
         setDefault("General.bStats", true);
         setDefault("Size.Transition", true);
         setDefault("Size.TransitionSteps", 30);
-        setDefault("Size.ReachMultiplier", true);
-        setDefault("Size.StepHeightMultiplier", true);
-        setDefault("Size.SpeedMultiplier", true);
-        setDefault("Size.JumpMultiplier", true);
-        setDefault("Size.SaveFallDistanceMultiplier", true);
+        setDefault("Size.IsReachMultiplier", true);
+        setDefault("Size.IsStepHeightMultiplier", true);
+        setDefault("Size.IsSpeedMultiplier", true);
+        setDefault("Size.IsJumpMultiplier", true);
+        setDefault("Size.IsSaveFallDistanceMultiplier", true);
+
+        setDefault("Size.ReachMultiplier", 1);
+        setDefault("Size.StepHeightMultiplier", 1);
+        setDefault("Size.SpeedMultiplier", 1);
+        setDefault("Size.JumpMultiplier", 1);
+        setDefault("Size.SaveFallDistanceMultiplier", 1);
         saveConfig();
         initValues();
     }
@@ -37,11 +49,18 @@ public class Config {
     private void initValues() {
         this.bStats = cfg.getBoolean("General.bStats");
         this.transition = cfg.getBoolean("Size.Transition");
-        this.reachMultiplier = cfg.getBoolean("Size.ReachMultiplier");
-        this.stepHeightMultiplier = cfg.getBoolean("Size.StepHeightMultiplier");
-        this.speedMultiplier = cfg.getBoolean("Size.SpeedMultiplier");
-        this.jumpMultiplier = cfg.getBoolean("Size.JumpMultiplier");
-        this.saveFallDistanceMultiplier = cfg.getBoolean("Size.SaveFallDistanceMultiplier");
+        this.isReachMultiplier = cfg.getBoolean("Size.IsReachMultiplier");
+        this.isStepHeightMultiplier = cfg.getBoolean("Size.IsStepHeightMultiplier");
+        this.isSpeedMultiplier = cfg.getBoolean("Size.IsSpeedMultiplier");
+        this.isJumpMultiplier = cfg.getBoolean("Size.IsJumpMultiplier");
+        this.isSaveFallDistanceMultiplier = cfg.getBoolean("Size.IsSaveFallDistanceMultiplier");
+
+        this.reachMultiplier = cfg.getInt("Size.ReachMultiplier");
+        this.stepHeightMultiplier = cfg.getInt("Size.StepHeightMultiplier");
+        this.speedMultiplier = cfg.getInt("Size.SpeedMultiplier");
+        this.jumpMultiplier = cfg.getInt("Size.JumpMultiplier");
+        this.saveFallDistanceMultiplier = cfg.getInt("Size.SaveFallDistanceMultiplier");
+
         this.transitionSteps = cfg.getInt("Size.TransitionSteps");
     }
 
