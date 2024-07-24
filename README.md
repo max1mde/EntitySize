@@ -1,6 +1,6 @@
 <div align="center">
 
-  <p><b>Supported versions: </b>1.20.5, 1.20.6</p>
+  <p><b>Supported versions: </b>1.20.5, 1.20.6, 1.21.x</p>
   
   <img src="https://imgur.com/yMuZdvu.gif">
   
@@ -31,6 +31,7 @@ To make it more playable for a player with a different scale.
 ```
 /entitysize reload
 /entitysize <size> (Change your own size)
+/entitysize reset <optional player / @a> (Reset size to default)
 /entitysize player <player> <size>
 /entitysize entity looking <size> (The entity you are looking at)
 /entitysize entity tag <size> (All entities with a specific scoreboard tag)
