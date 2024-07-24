@@ -117,4 +117,29 @@ public final class EntitySize extends JavaPlugin {
         if(bestEntity == null) return Optional.empty();
         return Optional.of(bestEntity);
     }
+
+    public void resetSize(Player player) {
+        if(player.getAttribute(Attribute.GENERIC_SCALE) != null) {
+            player.getAttribute(Attribute.GENERIC_SCALE).setBaseValue(1);
+        }
+
+        if (player.getAttribute(Attribute.GENERIC_JUMP_STRENGTH) != null) {
+            player.getAttribute(Attribute.GENERIC_JUMP_STRENGTH).setBaseValue(0.41D);
+        }
+        if (player.getAttribute(Attribute.PLAYER_BLOCK_INTERACTION_RANGE) != null) {
+            player.getAttribute(Attribute.PLAYER_BLOCK_INTERACTION_RANGE).setBaseValue(4.5D);
+        }
+        if (player.getAttribute(Attribute.PLAYER_ENTITY_INTERACTION_RANGE) != null) {
+            player.getAttribute(Attribute.PLAYER_ENTITY_INTERACTION_RANGE).setBaseValue(3D);
+        }
+        if (player.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED) != null) {
+            player.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.1D);
+        }
+        if (player.getAttribute(Attribute.GENERIC_STEP_HEIGHT) != null) {
+            player.getAttribute(Attribute.GENERIC_STEP_HEIGHT).setBaseValue(0.6D);
+        }
+        if (player.getAttribute(Attribute.GENERIC_SAFE_FALL_DISTANCE) != null) {
+            player.getAttribute(Attribute.GENERIC_SAFE_FALL_DISTANCE).setBaseValue(3.0D);
+        }
+    }
 }

@@ -64,6 +64,33 @@ public class EntitySizeCommand implements CommandExecutor, TabCompleter {
                 sender.sendMessage(entitySize.getPrimaryColor() + "Config reloaded!");
             }
 
+            case "reset" -> {
+                if(args.length == 1) {
+                    entitySize.getConfiguration().reload();
+                    entitySize.resetSize((Player)sender);
+                    sender.sendMessage(entitySize.getPrimaryColor() + "Size resetet!");
+                    return false;
+                } else if (args.length == 2) {
+
+                    if(args[1].equalsIgnoreCase("@a")) {
+                        Bukkit.getOnlinePlayers().forEach(entitySize::resetSize);
+                        sender.sendMessage(entitySize.getPrimaryColor() + "Size resetet for " + Bukkit.getOnlinePlayers().size()+" players!");
+                        return true;
+                    }
+
+                    Player target = Bukkit.getPlayer(args[1]);
+                    if(target == null || !target.isOnline()) {
+                        sender.sendMessage(entitySize.getPrimaryColor() + "Player with the name " + args[1] + " not found!");
+                        return false;
+                    }
+                    entitySize.resetSize(target);
+                    sender.sendMessage(entitySize.getPrimaryColor() + "Size resetet for " + target.getName());
+                    return true;
+                }
+                sendCommands(sender);
+                return false;
+            }
+
             default -> {
                 try {
                     double size = Double.parseDouble(args[0]);
@@ -171,6 +198,7 @@ public class EntitySizeCommand implements CommandExecutor, TabCompleter {
     private boolean sendCommands(CommandSender sender) {
         sender.sendMessage(entitySize.getPrimaryColor() +
                 "/entitysize reload (Reload config)\n" +
+                "/entitysize reset <optional player / @a> (Reset size to default)\n" +
                 "/entitysize <size> (Change your own size)\n" +
                 "/entitysize player <player size>\n" +
                 "/entitysize entity looking (The entity you are looking at)\n" +
@@ -194,7 +222,7 @@ public class EntitySizeCommand implements CommandExecutor, TabCompleter {
 
 
         if (args.length == 1) {
-            commands.addAll(Arrays.asList("<size>", "reload", "player", "entity"));
+            commands.addAll(Arrays.asList("<size>", "reload", "player", "entity", "reset"));
             StringUtil.copyPartialMatches(args[0], commands, completions);
         }
 
