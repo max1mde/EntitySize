@@ -85,7 +85,7 @@ public class EntitySizeCommand implements CommandExecutor, TabCompleter {
                 if(args.length == 1) {
                     entitySize.getConfiguration().reload();
                     entitySize.resetSize((Player)sender);
-                    sender.sendMessage(entitySize.getPrimaryColor() + "Size resetet!");
+                    sender.sendMessage(entitySize.getPrimaryColor() + "Size reset!");
                     return false;
                 } else if (args.length == 2) {
                     if(args[1].equalsIgnoreCase("@a")) {
@@ -94,7 +94,7 @@ public class EntitySizeCommand implements CommandExecutor, TabCompleter {
                             return false;
                         }
                         Bukkit.getOnlinePlayers().forEach(entitySize::resetSize);
-                        sender.sendMessage(entitySize.getPrimaryColor() + "Size resetet for " + Bukkit.getOnlinePlayers().size()+" players!");
+                        sender.sendMessage(entitySize.getPrimaryColor() + "Size reset for " + Bukkit.getOnlinePlayers().size()+" players!");
                         return true;
                     }
                     if(!sender.hasPermission(entitySize.getPermission("reset.player"))) {
@@ -108,7 +108,7 @@ public class EntitySizeCommand implements CommandExecutor, TabCompleter {
                         return false;
                     }
                     entitySize.resetSize(target);
-                    sender.sendMessage(entitySize.getPrimaryColor() + "Size resetet for " + target.getName());
+                    sender.sendMessage(entitySize.getPrimaryColor() + "Size reset for " + target.getName());
                     return true;
                 }
                 sendCommands(sender);

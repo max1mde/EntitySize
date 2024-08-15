@@ -28,7 +28,7 @@ permissions:
     description: Allows the ability to reset any player
     default: false
   entitysize.reset.all:
-    description: Allows the ability to reset all players
+    description: Allows the ability to reset all players, using @a
     default: false
   entitysize.self:
     description: Allows the use of the self subcommand
