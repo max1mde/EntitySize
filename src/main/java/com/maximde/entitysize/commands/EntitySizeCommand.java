@@ -41,28 +41,51 @@ public class EntitySizeCommand implements CommandExecutor, TabCompleter {
                     return false;
                 }
                 if(args.length < 3) return sendCommands(sender);
-                Player target = Bukkit.getPlayer(args[1]);
-                if(target == null || !target.isOnline()) {
-                    sender.sendMessage(entitySize.getPrimaryColor() + "Player with the name " + args[1] + " not found!");
-                    return false;
+                if(args[1].equalsIgnoreCase("@a")) {
+                    try {
+                        double size = Double.parseDouble(args[2]);
+                        int time = -1;
+                        if (args.length >= 4) {
+                            time = Integer.parseInt(args[3]);
+                        }
+                        for (Player player : Bukkit.getOnlinePlayers()) {
+                            setSize(player, size, time);
+                        }
+
+                        sender.sendMessage(entitySize.getPrimaryColor() + "Successfully changed the size of " + Bukkit.getOnlinePlayers().size() + " player/s!"
+                                + (time > 0 ? " (Resetting in " + time + " minute/s)" : ""));
+                    } catch (NumberFormatException e) {
+                        sender.sendMessage(entitySize.getPrimaryColor() + "Invalid number format!");
+                        e.printStackTrace();
+                    } catch (Exception e) {
+                        sender.sendMessage(entitySize.getPrimaryColor() + "An error occurred while changing the size.");
+                        e.printStackTrace();
+                    }
+                } else {
+                    Player target = Bukkit.getPlayer(args[1]);
+                    if(target == null || !target.isOnline()) {
+                        sender.sendMessage(entitySize.getPrimaryColor() + "Player with the name " + args[1] + " not found!");
+                        return false;
+                    }
+
+                    try {
+                        double size = Double.parseDouble(args[2]);
+                        int time = -1;
+                        if (args.length >= 4) {
+                            time = Integer.parseInt(args[3]);
+                        }
+                        setSize(target, size, time);
+                        sender.sendMessage(entitySize.getPrimaryColor() + "Successfully changed the size of " + target.getName()
+                                + (time > 0 ? " (Resetting in " + time + " minute/s)" : ""));
+                    } catch (NumberFormatException e) {
+                        sender.sendMessage(entitySize.getPrimaryColor() + "Invalid number format!");
+                        e.printStackTrace();
+                    } catch (Exception e) {
+                        sender.sendMessage(entitySize.getPrimaryColor() + "An error occurred while changing the size.");
+                        e.printStackTrace();
+                    }
                 }
 
-                try {
-                    double size = Double.parseDouble(args[2]);
-                    int time = -1;
-                    if (args.length >= 4) {
-                        time = Integer.parseInt(args[3]);
-                    }
-                    setSize(target, size, time);
-                    sender.sendMessage(entitySize.getPrimaryColor() + "Successfully changed the size of " + target.getName()
-                            + (time > 0 ? " (Resetting in " + time + "minute/s )" : ""));
-                } catch (NumberFormatException e) {
-                    sender.sendMessage(entitySize.getPrimaryColor() + "Invalid number format!");
-                    e.printStackTrace();
-                } catch (Exception e) {
-                    sender.sendMessage(entitySize.getPrimaryColor() + "An error occurred while changing the size.");
-                    e.printStackTrace();
-                }
             }
 
             case "entity" -> {
@@ -216,8 +239,8 @@ public class EntitySizeCommand implements CommandExecutor, TabCompleter {
                 if (args.length >= 5) {
                     time = Integer.parseInt(args[4]);
                 }
-                sender.sendMessage(entitySize.getPrimaryColor() + "Changing the size of all entities with the name: "+name+"!");
-                handleEntities(entity -> (entity.getCustomName() != null && entity.getCustomName().equalsIgnoreCase(name)) || entity.getName().equalsIgnoreCase(name), size, time, sender);
+                sender.sendMessage(entitySize.getPrimaryColor() + "Changing the size of all entities with the name (Entity Type): "+name+"!");
+                handleEntities(entity -> (entity.getType().name().equalsIgnoreCase(name)), size, time, sender);
 
                 return true;
             }
@@ -352,6 +375,7 @@ public class EntitySizeCommand implements CommandExecutor, TabCompleter {
                 Bukkit.getOnlinePlayers().forEach(player -> {
                     commands.add(player.getName());
                 });
+                commands.add("@a");
             }
             if(args[0].equalsIgnoreCase("entity") && sender.hasPermission(entitySize.getPermission("entity"))) {
                 if (sender.hasPermission(entitySize.getPermission("entity.looking"))) commands.add("looking");
