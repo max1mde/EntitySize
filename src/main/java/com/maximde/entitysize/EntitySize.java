@@ -6,25 +6,31 @@ import com.maximde.entitysize.utils.Metrics;
 import lombok.Getter;
 import net.md_5.bungee.api.ChatColor;
 
-
+import org.bukkit.OfflinePlayer;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import org.bukkit.attribute.Attribute;
+
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
 
 import java.awt.*;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
 @Getter
-public final class EntitySize extends JavaPlugin {
+public final class EntitySize extends JavaPlugin implements Listener {
 
     private Config configuration;
     private final ChatColor primaryColor = ChatColor.of(new Color(255, 157, 88));
+
+    private final Map<UUID, Boolean> pendingResets = new HashMap<>();
+    private final String PENDING_RESETS_PATH = "PendingResets";
 
     @Override
     public void onEnable() {
@@ -32,6 +38,8 @@ public final class EntitySize extends JavaPlugin {
         if(configuration.isBStats()) new Metrics(this, 21739);
         Objects.requireNonNull(getCommand("entitysize")).setExecutor(new EntitySizeCommand(this));
         Objects.requireNonNull(getCommand("entitysize")).setTabCompleter(new EntitySizeCommand(this));
+        getServer().getPluginManager().registerEvents(this, this);
+        loadPendingResets();
     }
 
     public String getPermission(String permission) {
@@ -140,6 +148,42 @@ public final class EntitySize extends JavaPlugin {
         }
         if (player.getAttribute(Attribute.GENERIC_SAFE_FALL_DISTANCE) != null) {
             player.getAttribute(Attribute.GENERIC_SAFE_FALL_DISTANCE).setBaseValue(3.0D);
+        }
+        pendingResets.remove(player.getUniqueId());
+        this.configuration.setValue(PENDING_RESETS_PATH + "." + player.getUniqueId().toString(), null);
+        this.configuration.saveConfig();
+    }
+
+    public void resetOfflinePlayerSize(UUID playerUUID) {
+        pendingResets.put(playerUUID, true);
+        savePendingResets();
+    }
+
+    private void savePendingResets() {
+        for (Map.Entry<UUID, Boolean> entry : pendingResets.entrySet()) {
+            this.configuration.setValue(PENDING_RESETS_PATH + "." + entry.getKey().toString(), entry.getValue());
+        }
+        this.configuration.saveConfig();
+    }
+
+    private void loadPendingResets() {
+        if (this.configuration.getValue(PENDING_RESETS_PATH) == null) return;
+
+        for (String key : this.configuration.getCfg().getConfigurationSection(PENDING_RESETS_PATH).getKeys(false)) {
+            pendingResets.put(UUID.fromString(key), this.configuration.getCfg().getBoolean(PENDING_RESETS_PATH + "." + key));
+        }
+    }
+
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        Player player = event.getPlayer();
+        UUID playerUUID = player.getUniqueId();
+
+        if (pendingResets.containsKey(playerUUID) && pendingResets.get(playerUUID)) {
+            resetSize(player);
+            pendingResets.remove(playerUUID);
+            this.configuration.setValue(PENDING_RESETS_PATH + "." + playerUUID.toString(), null);
+            this.configuration.saveConfig();
         }
     }
 }
