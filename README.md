@@ -21,6 +21,8 @@ Modify it for entities or players with a specific name, UUID, entity ID, scorebo
 There are also some other optional modifiers like:
 Movement speed, jump strength, step height, etc. (Look into the config)
 To make it more playable for a player with a different scale.
+
+This plugin overrides the vanilla player attributes!
 </p>
 
   
