@@ -69,8 +69,8 @@ public final class EntitySize extends JavaPlugin implements Listener {
 
         if (this.configuration.isJumpMultiplier()) {
             if (livingEntity.getAttribute(Attribute.GENERIC_JUMP_STRENGTH) != null) {
-                livingEntity.getAttribute(Attribute.GENERIC_JUMP_STRENGTH).setBaseValue(getValidBase(0.41D, 32, newScale * configuration.getJumpMultiplier()));
-                livingEntity.getAttribute(Attribute.GENERIC_JUMP_STRENGTH).setBaseValue(Math.max(getValidBase(0.41D, 32, newScale * configuration.getJumpMultiplier()), 0.2));
+                livingEntity.getAttribute(Attribute.GENERIC_JUMP_STRENGTH).setBaseValue(getValidBase(0.42D, 32, newScale * configuration.getJumpMultiplier()));
+                livingEntity.getAttribute(Attribute.GENERIC_JUMP_STRENGTH).setBaseValue(Math.max(getValidBase(0.42D, 32, newScale * configuration.getJumpMultiplier()), 0.2));
             }
         }
         if (this.configuration.isReachMultiplier()) {
@@ -132,7 +132,7 @@ public final class EntitySize extends JavaPlugin implements Listener {
         }
 
         if (player.getAttribute(Attribute.GENERIC_JUMP_STRENGTH) != null) {
-            player.getAttribute(Attribute.GENERIC_JUMP_STRENGTH).setBaseValue(0.41D);
+            player.getAttribute(Attribute.GENERIC_JUMP_STRENGTH).setBaseValue(0.42D);
         }
         if (player.getAttribute(Attribute.PLAYER_BLOCK_INTERACTION_RANGE) != null) {
             player.getAttribute(Attribute.PLAYER_BLOCK_INTERACTION_RANGE).setBaseValue(4.5D);
