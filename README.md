@@ -29,15 +29,15 @@ To make it more playable for a player with a different scale.
 # Commands
 
 ```
-/entitysize reload
-/entitysize <size> (Change your own size)
+/entitysize reload (Reload config)
 /entitysize reset <optional player / @a> (Reset size to default)
-/entitysize player <player> <size>
-/entitysize entity looking <size> (The entity you are looking at)
-/entitysize entity tag <size> (All entities with a specific scoreboard tag)
-/entitysize entity name <size> (All entities with a specific name)
-/entitysize entity uuid <size> (Entity with that uuid)
-/entitysize entity range <blocks> <size> (Entities in a specific range from your location)
+/entitysize <size> [time] (Change your own size)
+/entitysize player <player> <size> [time]
+/entitysize entity looking <size> [time] (The entity you are looking at)
+/entitysize entity tag <tag> <size> [time] (All entities with a specific scoreboard tag)
+/entitysize entity name <name> <size> [time] (All entities with a specific name)
+/entitysize entity uuid <uuid> <size> [time] (Entity with that uuid)
+/entitysize entity range <blocks> <size> [time] (Entities in a specific range from your location)
 ```
 
 # Config
@@ -47,15 +47,62 @@ General:
 Size:
   Transition: true
   TransitionSteps: 30
-  ReachMultiplier: true
-  StepHeightMultiplier: true
-  SpeedMultiplier: true
-  JumpMultiplier: true
-  SaveFallDistanceMultiplier: true
+  IsReachMultiplier: true
+  IsStepHeightMultiplier: true
+  IsSpeedMultiplier: true
+  IsJumpMultiplier: true
+  IsSaveFallDistanceMultiplier: true
+  ReachMultiplier: 1
+  StepHeightMultiplier: 1
+  SpeedMultiplier: 1
+  JumpMultiplier: 1
+  SaveFallDistanceMultiplier: 1
+PendingResets: {}
 ```
 
 # Permissions
-`EntitySize.commands`
+```
+permissions:
+  entitysize.commands:
+    description: Allows the use of the entitysize command
+    default: true
+  entitysize.player:
+    description: Allows the use of the player subcommand
+    default: false
+  entitysize.entity:
+    description: Allows the use of the entity subcommand
+    default: false
+  entitysize.reload:
+    description: Allows the use of the reload subcommand
+    default: false
+  entitysize.reset:
+    description: Allows the use of the reset subcommand
+    default: true
+  entitysize.reset.player:
+    description: Allows the ability to reset any player
+    default: false
+  entitysize.reset.all:
+    description: Allows the ability to reset all players, using @a
+    default: false
+  entitysize.self:
+    description: Allows the use of the self subcommand
+    default: true
+  entitysize.entity.looking:
+    description: Allows selecting the entity being looked at
+    default: false
+  entitysize.entity.tag:
+    description: Allows selecting the entity by tag
+    default: false
+  entitysize.entity.name:
+    description: Allows selecting the entity by name
+    default: false
+  entitysize.entity.uuid:
+    description: Allows selecting the entity by uuid
+    default: false
+  entitysize.entity.range:
+    description: Allows selecting the entity by range
+    default: false
+```
 
 # Support
 https://discord.com/invite/4pA7VUeQs4
