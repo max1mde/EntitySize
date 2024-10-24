@@ -14,37 +14,47 @@ permissions:
     default: true
   entitysize.player:
     description: Allows the use of the player subcommand
-    default: false
+    default: op
+    op: true
   entitysize.entity:
     description: Allows the use of the entity subcommand
-    default: false
+    default: op
+    op: true
   entitysize.reload:
     description: Allows the use of the reload subcommand
-    default: false
+    default: op
+    op: true
   entitysize.reset:
     description: Allows the use of the reset subcommand
     default: true
   entitysize.reset.player:
     description: Allows the ability to reset any player
-    default: false
+    default: op
+    op: true
   entitysize.reset.all:
     description: Allows the ability to reset all players, using @a
-    default: false
+    default: op
+    op: true
   entitysize.self:
     description: Allows the use of the self subcommand
     default: true
   entitysize.entity.looking:
     description: Allows selecting the entity being looked at
-    default: false
+    default: op
+    op: true
   entitysize.entity.tag:
     description: Allows selecting the entity by tag
-    default: false
+    default: op
+    op: true
   entitysize.entity.name:
     description: Allows selecting the entity by name
-    default: false
+    default: op
+    op: true
   entitysize.entity.uuid:
     description: Allows selecting the entity by uuid
-    default: false
+    default: op
+    op: true
   entitysize.entity.range:
     description: Allows selecting the entity by range
-    default: false
+    default: op
+    op: true

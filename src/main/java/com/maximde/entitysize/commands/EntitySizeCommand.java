@@ -27,11 +27,12 @@ public class EntitySizeCommand implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-        if(!sender.hasPermission(entitySize.getPermission("commands"))) {
+        boolean isConsole = !(sender instanceof Player);
+
+        if(!sender.hasPermission(entitySize.getPermission("commands")) && !isConsole) {
             sender.sendMessage(entitySize.getPrimaryColor() + "EntitySize by MaximDe v" + entitySize.getDescription().getVersion());
             return false;
         }
-
         if(args.length < 1) return sendCommands(sender);
 
         switch (args[0].toLowerCase()) {

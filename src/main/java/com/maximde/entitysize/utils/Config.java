@@ -21,6 +21,12 @@ public class Config {
     private boolean isSaveFallDistanceMultiplier;
     private int transitionSteps;
 
+    private boolean isReachReverted;
+    private boolean isStepHeightReverted;
+    private boolean isSpeedReverted;
+    private boolean isJumpReverted;
+    private boolean isSaveFallDistanceReverted;
+
     private double reachMultiplier;
     private double stepHeightMultiplier;
     private double speedMultiplier;
@@ -36,6 +42,12 @@ public class Config {
         setDefault("Size.IsSpeedMultiplier", true);
         setDefault("Size.IsJumpMultiplier", true);
         setDefault("Size.IsSaveFallDistanceMultiplier", true);
+
+        setDefault("Size.IsReachReverted", false);
+        setDefault("Size.IsStepHeightReverted", false);
+        setDefault("Size.IsSpeedReverted", false);
+        setDefault("Size.IsJumpReverted", false);
+        setDefault("Size.IsSaveFallDistanceReverted", false);
 
         setDefault("Size.ReachMultiplier", 1);
         setDefault("Size.StepHeightMultiplier", 1);
@@ -54,6 +66,12 @@ public class Config {
         this.isSpeedMultiplier = cfg.getBoolean("Size.IsSpeedMultiplier");
         this.isJumpMultiplier = cfg.getBoolean("Size.IsJumpMultiplier");
         this.isSaveFallDistanceMultiplier = cfg.getBoolean("Size.IsSaveFallDistanceMultiplier");
+
+        this.isReachReverted = cfg.getBoolean("Size.IsReachReverted");
+        this.isStepHeightReverted = cfg.getBoolean("Size.IsStepHeightReverted");
+        this.isSpeedReverted = cfg.getBoolean("Size.IsSpeedReverted");
+        this.isJumpReverted = cfg.getBoolean("Size.IsJumpReverted");
+        this.isSaveFallDistanceReverted = cfg.getBoolean("Size.IsSaveFallDistanceReverted");
 
         this.reachMultiplier = cfg.getDouble("Size.ReachMultiplier");
         this.stepHeightMultiplier = cfg.getDouble("Size.StepHeightMultiplier");
