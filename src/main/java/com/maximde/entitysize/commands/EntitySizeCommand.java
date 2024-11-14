@@ -10,6 +10,7 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.StringUtil;
 
@@ -24,12 +25,13 @@ public class EntitySizeCommand implements CommandExecutor, TabCompleter {
         this.entitySize = entitySize;
     }
 
+    private boolean hasPermission(CommandSender sender, String permission) {
+        return !(sender instanceof Player) || sender.hasPermission(permission);
+    }
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-
-        boolean isConsole = !(sender instanceof Player);
-
-        if(!sender.hasPermission(entitySize.getPermission("commands")) && !isConsole) {
+        if(!hasPermission(sender, entitySize.getPermission("commands"))) {
             sender.sendMessage(entitySize.getPrimaryColor() + "EntitySize by MaximDe v" + entitySize.getDescription().getVersion());
             return false;
         }
@@ -37,7 +39,7 @@ public class EntitySizeCommand implements CommandExecutor, TabCompleter {
 
         switch (args[0].toLowerCase()) {
             case "player" -> {
-                if(!sender.hasPermission(entitySize.getPermission("player"))) {
+                if(!hasPermission(sender, entitySize.getPermission("player"))) {
                     sender.sendMessage(entitySize.getPrimaryColor() + "You don't have the permission to execute this subcommand!");
                     return false;
                 }
@@ -50,7 +52,7 @@ public class EntitySizeCommand implements CommandExecutor, TabCompleter {
                             time = Integer.parseInt(args[3]);
                         }
                         for (Player player : Bukkit.getOnlinePlayers()) {
-                            setSize(player, size, time);
+                            setSize(sender, player, size, time);
                         }
 
                         sender.sendMessage(entitySize.getPrimaryColor() + "Successfully changed the size of " + Bukkit.getOnlinePlayers().size() + " player/s!"
@@ -75,7 +77,7 @@ public class EntitySizeCommand implements CommandExecutor, TabCompleter {
                         if (args.length >= 4) {
                             time = Integer.parseInt(args[3]);
                         }
-                        setSize(target, size, time);
+                        setSize(sender, target, size, time);
                         sender.sendMessage(entitySize.getPrimaryColor() + "Successfully changed the size of " + target.getName()
                                 + (time > 0 ? " (Resetting in " + time + " minute/s)" : ""));
                     } catch (NumberFormatException e) {
@@ -90,7 +92,7 @@ public class EntitySizeCommand implements CommandExecutor, TabCompleter {
             }
 
             case "entity" -> {
-                if(!sender.hasPermission(entitySize.getPermission("entity"))) {
+                if(!hasPermission(sender, entitySize.getPermission("entity"))) {
                     sender.sendMessage(entitySize.getPrimaryColor() + "You don't have the permission to execute this command!");
                     return false;
                 }
@@ -100,7 +102,7 @@ public class EntitySizeCommand implements CommandExecutor, TabCompleter {
             }
 
             case "reload" -> {
-                if(!sender.hasPermission(entitySize.getPermission("reload"))) {
+                if(!hasPermission(sender, entitySize.getPermission("reload"))) {
                     sender.sendMessage(entitySize.getPrimaryColor() + "You don't have the permission to execute this command!");
                     return false;
                 }
@@ -109,7 +111,7 @@ public class EntitySizeCommand implements CommandExecutor, TabCompleter {
             }
 
             case "reset" -> {
-                if(!sender.hasPermission(entitySize.getPermission("reset"))) {
+                if(!hasPermission(sender, entitySize.getPermission("reset"))) {
                     sender.sendMessage(entitySize.getPrimaryColor() + "You don't have the permission to execute this command!");
                     return false;
                 }
@@ -120,7 +122,7 @@ public class EntitySizeCommand implements CommandExecutor, TabCompleter {
                     return false;
                 } else if (args.length == 2) {
                     if(args[1].equalsIgnoreCase("@a")) {
-                        if(!sender.hasPermission(entitySize.getPermission("reset.all"))) {
+                        if(!hasPermission(sender, entitySize.getPermission("reset.all"))) {
                             sender.sendMessage(entitySize.getPrimaryColor() + "You don't have the permission to execute this command!");
                             return false;
                         }
@@ -128,7 +130,7 @@ public class EntitySizeCommand implements CommandExecutor, TabCompleter {
                         sender.sendMessage(entitySize.getPrimaryColor() + "Size reset for " + Bukkit.getOnlinePlayers().size()+" players!");
                         return true;
                     }
-                    if(!sender.hasPermission(entitySize.getPermission("reset.player"))) {
+                    if(!hasPermission(sender, entitySize.getPermission("reset.player"))) {
                         sender.sendMessage(entitySize.getPrimaryColor() + "You don't have the permission to execute this command!");
                         return false;
                     }
@@ -148,7 +150,7 @@ public class EntitySizeCommand implements CommandExecutor, TabCompleter {
 
             default -> {
                 try {
-                    if(!sender.hasPermission(entitySize.getPermission("self"))) {
+                    if(!hasPermission(sender, entitySize.getPermission("self"))) {
                         sender.sendMessage(entitySize.getPrimaryColor() + "You don't have the permission to execute this command!");
                         return false;
                     }
@@ -158,7 +160,7 @@ public class EntitySizeCommand implements CommandExecutor, TabCompleter {
                         time = Integer.parseInt(args[1]);
                     }
                     Player player = (Player) sender;
-                    setSize(player, size, time);
+                    setSize(sender, player, size, time);
                     sender.sendMessage(entitySize.getPrimaryColor() + "Successfully changed the size of " + player.getName()
                             + (time > 0 ? " (Resetting in " + time + " minute/s)" : ""));
                 } catch (Exception exception) {
@@ -178,7 +180,7 @@ public class EntitySizeCommand implements CommandExecutor, TabCompleter {
 
         switch (args[1].toLowerCase()) {
             case "looking" -> {
-                if(!sender.hasPermission(entitySize.getPermission("entity.looking"))) {
+                if(!hasPermission(sender, entitySize.getPermission("entity.looking"))) {
                     sender.sendMessage(entitySize.getPrimaryColor() + "You don't have the permission to execute this command!");
                     return false;
                 }
@@ -206,7 +208,7 @@ public class EntitySizeCommand implements CommandExecutor, TabCompleter {
                 return true;
             }
             case "tag" -> {
-                if(!sender.hasPermission(entitySize.getPermission("entity.tag"))) {
+                if(!hasPermission(sender, entitySize.getPermission("entity.tag"))) {
                     sender.sendMessage(entitySize.getPrimaryColor() + "You don't have the permission to execute this command!");
                     return false;
                 }
@@ -226,7 +228,7 @@ public class EntitySizeCommand implements CommandExecutor, TabCompleter {
                 return true;
             }
             case "name" -> {
-                if(!sender.hasPermission(entitySize.getPermission("entity.name"))) {
+                if(!hasPermission(sender, entitySize.getPermission("entity.name"))) {
                     sender.sendMessage(entitySize.getPrimaryColor() + "You don't have the permission to execute this command!");
                     return false;
                 }
@@ -246,7 +248,7 @@ public class EntitySizeCommand implements CommandExecutor, TabCompleter {
                 return true;
             }
             case "uuid" -> {
-                if(!sender.hasPermission(entitySize.getPermission("entity.uuid"))) {
+                if(!hasPermission(sender, entitySize.getPermission("entity.uuid"))) {
                     sender.sendMessage(entitySize.getPrimaryColor() + "You don't have the permission to execute this command!");
                     return false;
                 }
@@ -265,7 +267,7 @@ public class EntitySizeCommand implements CommandExecutor, TabCompleter {
                 return true;
             }
             case "range" -> {
-                if(!sender.hasPermission(entitySize.getPermission("entity.range"))) {
+                if(!hasPermission(sender, entitySize.getPermission("entity.range"))) {
                     sender.sendMessage(entitySize.getPrimaryColor() + "You don't have the permission to execute this command!");
                     return false;
                 }
@@ -296,12 +298,12 @@ public class EntitySizeCommand implements CommandExecutor, TabCompleter {
         return player.getNearbyEntities(range, range, range).contains(entity) || entity == player;
     }
 
-    private void handleEntities(Predicate<Entity> condition, double size, int time, CommandSender commandSender) {
+    private void handleEntities(Predicate<Entity> condition, double size, int time, CommandSender sender) {
         List<UUID> affectedEntities = new ArrayList<>();
         for(World world : Bukkit.getWorlds()) {
             for (Entity entity : world.getEntities()) {
                 if (condition.test(entity) && entity instanceof LivingEntity livingEntity) {
-                    setSize(livingEntity, size, time);
+                    setSize(sender, livingEntity, size, time);
                     if(entity instanceof Player) {
                         affectedEntities.add(entity.getUniqueId());
                     }
@@ -310,11 +312,46 @@ public class EntitySizeCommand implements CommandExecutor, TabCompleter {
         }
         if (time > 0) {
             scheduleReset(affectedEntities, time);
-            commandSender.sendMessage(this.entitySize.getPrimaryColor() + "Resetting the size of all players from " + affectedEntities.size() + " affected entities in " + time + " minute/s!");
+            sender.sendMessage(this.entitySize.getPrimaryColor() + "Resetting the size of all players from " + affectedEntities.size() + " affected entities in " + time + " minute/s!");
         }
     }
 
-    private void setSize(LivingEntity entity, double size, int time) {
+    private void setSize(CommandSender sender, LivingEntity entity, double size, int time) {
+        if (!hasPermission(sender, "entitysize.sizelimit.bypass")) {
+            double minSize = 0.1;
+            double maxSize = 10.0;
+
+            if (sender instanceof Player player) {
+                for (PermissionAttachmentInfo perm : player.getEffectivePermissions()) {
+                    String permission = perm.getPermission();
+                    if (perm.getValue()) {
+                        if (permission.startsWith("entitysize.sizelimit.min.")) {
+                            try {
+                                String sizeStr = permission.substring("entitysize.sizelimit.min.".length());
+                                minSize = Double.parseDouble(sizeStr);
+                                Bukkit.broadcastMessage(String.valueOf(minSize));
+                            } catch (NumberFormatException ignored) {}
+                        }
+                        else if (permission.startsWith("entitysize.sizelimit.max.")) {
+                            try {
+                                String sizeStr = permission.substring("entitysize.sizelimit.max.".length());
+                                maxSize = Double.parseDouble(sizeStr);
+                            } catch (NumberFormatException ignored) {}
+                        }
+                    }
+                }
+            }
+
+            if (size < minSize) {
+                size = minSize;
+                sender.sendMessage(entitySize.getPrimaryColor() + "Size was limited to minimum: " + minSize);
+            }
+            if (size > maxSize) {
+                size = maxSize;
+                sender.sendMessage(entitySize.getPrimaryColor() + "Size was limited to maximum: " + maxSize);
+            }
+        }
+
         entitySize.setSize(entity, size);
         if (time > 0 && entity instanceof Player player) {
             scheduleReset(Collections.singletonList(player.getUniqueId()), time);
@@ -354,7 +391,7 @@ public class EntitySizeCommand implements CommandExecutor, TabCompleter {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
         if(sender instanceof Player player) {
-            if(!player.hasPermission(entitySize.getPermission("commands"))) {
+            if(!hasPermission(sender, entitySize.getPermission("commands"))) {
                 return new ArrayList<>();
             }
         }
@@ -363,38 +400,38 @@ public class EntitySizeCommand implements CommandExecutor, TabCompleter {
         List<String> commands = new ArrayList<>();
 
         if (args.length == 1) {
-            if (sender.hasPermission(entitySize.getPermission("player"))) commands.add("player");
-            if (sender.hasPermission(entitySize.getPermission("entity"))) commands.add("entity");
-            if (sender.hasPermission(entitySize.getPermission("reload"))) commands.add("reload");
-            if (sender.hasPermission(entitySize.getPermission("reset"))) commands.add("reset");
-            if (sender.hasPermission(entitySize.getPermission("self")) && sender instanceof Player) commands.add("<size>");
+            if (hasPermission(sender, entitySize.getPermission("player"))) commands.add("player");
+            if (hasPermission(sender, entitySize.getPermission("entity"))) commands.add("entity");
+            if (hasPermission(sender, entitySize.getPermission("reload"))) commands.add("reload");
+            if (hasPermission(sender, entitySize.getPermission("reset"))) commands.add("reset");
+            if (hasPermission(sender, entitySize.getPermission("self")) && sender instanceof Player) commands.add("<size>");
             StringUtil.copyPartialMatches(args[0], commands, completions);
         }
 
         if (args.length == 2) {
-            if(args[0].equalsIgnoreCase("player") && sender.hasPermission(entitySize.getPermission("player"))) {
+            if(args[0].equalsIgnoreCase("player") && hasPermission(sender, entitySize.getPermission("player"))) {
                 Bukkit.getOnlinePlayers().forEach(player -> {
                     commands.add(player.getName());
                 });
                 commands.add("@a");
             }
-            if(args[0].equalsIgnoreCase("entity") && sender.hasPermission(entitySize.getPermission("entity"))) {
-                if (sender.hasPermission(entitySize.getPermission("entity.looking"))) commands.add("looking");
-                if (sender.hasPermission(entitySize.getPermission("entity.tag"))) commands.add("tag");
-                if (sender.hasPermission(entitySize.getPermission("entity.name"))) commands.add("name");
-                if (sender.hasPermission(entitySize.getPermission("entity.uuid"))) commands.add("uuid");
-                if (sender.hasPermission(entitySize.getPermission("entity.range"))) commands.add("range");
+            if(args[0].equalsIgnoreCase("entity") && hasPermission(sender, entitySize.getPermission("entity"))) {
+                if (hasPermission(sender, entitySize.getPermission("entity.looking"))) commands.add("looking");
+                if (hasPermission(sender, entitySize.getPermission("entity.tag"))) commands.add("tag");
+                if (hasPermission(sender, entitySize.getPermission("entity.name"))) commands.add("name");
+                if (hasPermission(sender, entitySize.getPermission("entity.uuid"))) commands.add("uuid");
+                if (hasPermission(sender, entitySize.getPermission("entity.range"))) commands.add("range");
             }
             try {
                 Integer.parseInt(args[0]);
-                if (sender.hasPermission(entitySize.getPermission("entity.self"))) commands.add("<reset time in minutes>");
+                if (hasPermission(sender, entitySize.getPermission("entity.self"))) commands.add("<reset time in minutes>");
             } catch (NumberFormatException ignore){}
             StringUtil.copyPartialMatches(args[1], commands, completions);
         }
 
         if (args.length == 3) {
-            if(args[0].equalsIgnoreCase("player")&&sender.hasPermission(entitySize.getPermission("player"))) commands.add("<size>");
-            if(args[0].equalsIgnoreCase("entity")&&sender.hasPermission(entitySize.getPermission("entity"))) {
+            if(args[0].equalsIgnoreCase("player") && hasPermission(sender, entitySize.getPermission("player"))) commands.add("<size>");
+            if(args[0].equalsIgnoreCase("entity") && hasPermission(sender, entitySize.getPermission("entity"))) {
                 switch (args[1].toLowerCase()) {
                     case "tag" -> commands.add("<tag>");
                     case "name" -> commands.add("<name>");
@@ -407,11 +444,10 @@ public class EntitySizeCommand implements CommandExecutor, TabCompleter {
         }
 
         if (args.length == 4) {
-            if(args[0].equalsIgnoreCase("player") && sender.hasPermission(entitySize.getPermission("player"))) commands.add("<reset time in minutes>");
-            if(args[0].equalsIgnoreCase("entity") && sender.hasPermission(entitySize.getPermission("entity"))) {
+            if(args[0].equalsIgnoreCase("player") && hasPermission(sender, entitySize.getPermission("player"))) commands.add("<reset time in minutes>");
+            if(args[0].equalsIgnoreCase("entity") && hasPermission(sender, entitySize.getPermission("entity"))) {
                 if (args[1].toLowerCase().equals("looking")) {
                     commands.add("<reset time in minutes>");
-
                 }
                 switch (args[1].toLowerCase()) {
                     case "tag", "name", "uuid", "range" -> commands.add("<size>");
@@ -421,7 +457,7 @@ public class EntitySizeCommand implements CommandExecutor, TabCompleter {
         }
 
         if (args.length == 5) {
-            if(args[0].equalsIgnoreCase("entity")&&sender.hasPermission(entitySize.getPermission("entity"))) {
+            if(args[0].equalsIgnoreCase("entity") && hasPermission(sender, entitySize.getPermission("entity"))) {
                 switch (args[1].toLowerCase()) {
                     case "tag", "name", "uuid", "range" -> commands.add("<reset time in minutes>");
                 }

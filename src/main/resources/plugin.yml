@@ -58,3 +58,7 @@ permissions:
     description: Allows selecting the entity by range
     default: op
     op: true
+  entitysize.sizelimit.bypass:
+    description: Allows bypassing size limits
+    default: op
+    op: true
