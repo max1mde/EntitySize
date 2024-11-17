@@ -106,5 +106,28 @@ permissions:
     default: false
 ```
 
+# API
+Gradle
+```
+		repositories {
+			mavenCentral()
+			maven { url 'https://jitpack.io' }
+		}
+
+	dependencies {
+	        implementation 'com.github.max1mde:EntitySize:1.5.3'
+	}
+```
+
+Add 
+
+```java
+EntityModifierService modifierService = EntitySize.getSizeService();
+
+modifierService.resetSize(player);
+modifierService.setSize(livingEntity, newScale);
+modifierService.getEntity(player, range);
+```
+
 # Support
 https://discord.com/invite/4pA7VUeQs4
