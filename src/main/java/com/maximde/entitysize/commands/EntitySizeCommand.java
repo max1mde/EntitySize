@@ -329,7 +329,6 @@ public class EntitySizeCommand implements CommandExecutor, TabCompleter {
                             try {
                                 String sizeStr = permission.substring("entitysize.sizelimit.min.".length());
                                 minSize = Double.parseDouble(sizeStr);
-                                Bukkit.broadcastMessage(String.valueOf(minSize));
                             } catch (NumberFormatException ignored) {}
                         }
                         else if (permission.startsWith("entitysize.sizelimit.max.")) {
