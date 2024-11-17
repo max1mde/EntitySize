@@ -6,6 +6,7 @@ import com.maximde.entitysize.utils.Config;
 import com.maximde.entitysize.utils.Metrics;
 import lombok.Getter;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,20 +16,29 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.awt.Color;
 import java.util.*;
+import java.util.logging.Level;
 
 @Getter
 public final class EntitySize extends JavaPlugin implements Listener {
 
     private Config configuration;
-    private EntityModifierService modifierService;
+    private static EntityModifierService modifierService;
     private final ChatColor primaryColor = ChatColor.of(new Color(255, 157, 88));
     private final Map<UUID, Boolean> pendingResets = new HashMap<>();
     private static final String PENDING_RESETS_PATH = "PendingResets";
 
+    public static Optional<EntityModifierService> getSizeService() {
+        if (modifierService == null) {
+            Bukkit.getLogger().log(Level.WARNING, "Tried to access the EntitySize API but it was not initialized yet! Add depends 'EntitySize' to your in plugin.yml");
+            return Optional.empty();
+        }
+        return Optional.of(modifierService);
+    }
+
     @Override
     public void onEnable() {
         this.configuration = new Config();
-        this.modifierService = new EntityModifierService(this);
+        modifierService = new EntityModifierService(this);
 
         if(configuration.isBStats()) {
             new Metrics(this, 21739);
