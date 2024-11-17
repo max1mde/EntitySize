@@ -1,4 +1,8 @@
 <div align="center">
+	
+<a href="https://jitpack.io/#max1mde/EntitySize">
+<img src="https://jitpack.io/v/max1mde/EntitySize.svg">
+</a>
 
   <p><b>Supported versions: </b>1.20.5, 1.20.6, 1.21.x</p>
   
@@ -109,14 +113,14 @@ permissions:
 # API
 Gradle
 ```
-		repositories {
-			mavenCentral()
-			maven { url 'https://jitpack.io' }
-		}
+repositories {
+	mavenCentral()
+	maven { url 'https://jitpack.io' }
+}
 
-	dependencies {
-	        implementation 'com.github.max1mde:EntitySize:1.5.3'
-	}
+dependencies {
+	 implementation 'com.github.max1mde:EntitySize:1.5.3'
+}
 ```
 
 Add 
