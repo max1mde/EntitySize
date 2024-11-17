@@ -119,7 +119,7 @@ repositories {
 }
 
 dependencies {
-	 implementation 'com.github.max1mde:EntitySize:1.5.3'
+	 implementation 'com.github.max1mde:EntitySize:1.5.4'
 }
 ```
 
