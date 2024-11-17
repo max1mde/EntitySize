@@ -1,4 +1,8 @@
 <div align="center">
+	
+<a href="https://jitpack.io/#max1mde/EntitySize">
+<img src="https://jitpack.io/v/max1mde/EntitySize.svg">
+</a>
 
   <p><b>Supported versions: </b>1.20.5, 1.20.6, 1.21.x</p>
   
