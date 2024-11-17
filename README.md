@@ -109,14 +109,14 @@ permissions:
 # API
 Gradle
 ```
-		repositories {
-			mavenCentral()
-			maven { url 'https://jitpack.io' }
-		}
+repositories {
+	mavenCentral()
+	maven { url 'https://jitpack.io' }
+}
 
-	dependencies {
-	        implementation 'com.github.max1mde:EntitySize:1.5.3'
-	}
+dependencies {
+	 implementation 'com.github.max1mde:EntitySize:1.5.3'
+}
 ```
 
 Add 
