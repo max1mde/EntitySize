@@ -1,12 +1,7 @@
 <div align="center">
 	
-<a href="https://jitpack.io/#max1mde/EntitySize">
-<img src="https://jitpack.io/v/max1mde/EntitySize.svg">
-</a>
-
-  <a href="https://discord.gg/2UTkYj26B4" target="_blank">
-      <img src="https://img.shields.io/badge/Discord_Server-7289DA?style=flat&logo=discord&logoColor=white" alt="Join Discord Server" style="border-radius: 15px; height: 20px;">
-  </a>
+<a href="https://jitpack.io/#max1mde/EntitySize"><img src="https://jitpack.io/v/max1mde/EntitySize.svg"></a>
+<a href="https://discord.gg/2UTkYj26B4" target="_blank"><img src="https://img.shields.io/badge/Discord_Server-7289DA?style=flat&logo=discord&logoColor=white" alt="Join Discord Server" style="border-radius: 15px; height: 20px;"></a>
 
   <p><b>Supported versions: </b>1.20.5, 1.20.6, 1.21.x</p>
   
