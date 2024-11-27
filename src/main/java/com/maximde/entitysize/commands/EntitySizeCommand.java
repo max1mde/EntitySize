@@ -10,6 +10,7 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.entity.EntityToggleGlideEvent;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.StringUtil;
@@ -38,7 +39,31 @@ public class EntitySizeCommand implements CommandExecutor, TabCompleter {
         if(args.length < 1) return sendCommands(sender);
 
         switch (args[0].toLowerCase()) {
-            case "player" -> {
+            case "add" -> {
+                if (!hasPermission(sender, entitySize.getPermission("add"))) {
+                    sender.sendMessage(entitySize.getPrimaryColor() + "You don't have the permission to execute this subcommand!");
+                    return false;
+                }
+                if (!(sender instanceof Player player)) {
+                    sender.sendMessage(entitySize.getPrimaryColor() + "This command can only be used by players!");
+                    return false;
+                }
+                if (args.length < 2) {
+                    sender.sendMessage(entitySize.getPrimaryColor() + "Usage: /entitysize add <size>");
+                    return false;
+                }
+                try {
+                    double currentSize = entitySize.getSize(player);
+                    double deltaSize = Double.parseDouble(args[1]);
+                    double newSize = currentSize + deltaSize;
+
+                    setSize(sender, player, newSize, -1);
+                    sender.sendMessage(entitySize.getPrimaryColor() + "Your size has been updated to " + newSize + "!");
+                } catch (NumberFormatException e) {
+                    sender.sendMessage(entitySize.getPrimaryColor() + "Invalid number format!");
+                }
+            }
+        case "player" -> {
                 if(!hasPermission(sender, entitySize.getPermission("player"))) {
                     sender.sendMessage(entitySize.getPrimaryColor() + "You don't have the permission to execute this subcommand!");
                     return false;
@@ -376,6 +401,7 @@ public class EntitySizeCommand implements CommandExecutor, TabCompleter {
     private boolean sendCommands(CommandSender sender) {
         sender.sendMessage(entitySize.getPrimaryColor() +
                 "/entitysize reload (Reload config)\n" +
+                "/entitysize add <size> (Add or subtract from your current size)\n" +
                 "/entitysize reset <optional player / @a> (Reset size to default)\n" +
                 "/entitysize <size> [time] (Change your own size)\n" +
                 "/entitysize player <player> <size> [time]\n" +
@@ -399,12 +425,20 @@ public class EntitySizeCommand implements CommandExecutor, TabCompleter {
         List<String> commands = new ArrayList<>();
 
         if (args.length == 1) {
+            if (hasPermission(sender, entitySize.getPermission("add"))) commands.add("add");
             if (hasPermission(sender, entitySize.getPermission("player"))) commands.add("player");
             if (hasPermission(sender, entitySize.getPermission("entity"))) commands.add("entity");
             if (hasPermission(sender, entitySize.getPermission("reload"))) commands.add("reload");
             if (hasPermission(sender, entitySize.getPermission("reset"))) commands.add("reset");
             if (hasPermission(sender, entitySize.getPermission("self")) && sender instanceof Player) commands.add("<size>");
             StringUtil.copyPartialMatches(args[0], commands, completions);
+        }
+
+        if (args.length == 2) {
+            if ("add".equalsIgnoreCase(args[0]) && hasPermission(sender, entitySize.getPermission("add"))) {
+                commands.add("<size>");
+            }
+            StringUtil.copyPartialMatches(args[1], commands, completions);
         }
 
         if (args.length == 2) {

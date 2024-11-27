@@ -98,6 +98,10 @@ public final class EntitySize extends JavaPlugin implements Listener {
         modifierService.setSize(livingEntity, newScale);
     }
 
+    public double getSize(LivingEntity livingEntity) {
+        return modifierService.getSize(livingEntity);
+    }
+
     public Optional<LivingEntity> getEntity(Player player, int range) {
        return modifierService.getEntity(player, range);
     }

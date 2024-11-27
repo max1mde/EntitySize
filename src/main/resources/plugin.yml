@@ -62,3 +62,8 @@ permissions:
     description: Allows bypassing size limits
     default: op
     op: true
+  entitysize.add:
+    description: Allows the player to use /entitysize add
+    default: op
+    op: true
+

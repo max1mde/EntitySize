@@ -118,6 +118,10 @@ public class EntityModifierService {
         modifiers.forEach(modifier -> modifier.apply(entity, newScale));
     }
 
+    public double getSize(LivingEntity livingEntity) {
+        return livingEntity.getAttribute(Attribute.GENERIC_SCALE).getBaseValue();
+    }
+
     public void resetSize(Player player) {
         List.of(
                 new AttributeModifier(Attribute.GENERIC_SCALE, 1.0D),
@@ -148,4 +152,6 @@ public class EntityModifierService {
                 .filter(e -> playerLookDir.angle(
                         e.getLocation().toVector().subtract(playerEyeLocation)) < 0.4f);
     }
+
+
 }
