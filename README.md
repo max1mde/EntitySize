@@ -3,7 +3,7 @@
 <a href="https://jitpack.io/#max1mde/EntitySize"><img src="https://jitpack.io/v/max1mde/EntitySize.svg"></a>
 <a href="https://discord.gg/2UTkYj26B4" target="_blank"><img src="https://img.shields.io/badge/Discord_Server-7289DA?style=flat&logo=discord&logoColor=white" alt="Join Discord Server" style="border-radius: 15px; height: 20px;"></a>
 
-<a href="https://github.com/max1mde/fancy-readme-stats"><img src="https://fancy-readme-stats.vercel.app/api/pin-wide/?username=max1mde&repo=EntitySize&dark_bg=3&theme=beach&footer=Supported%20versions%3A%201.20.5%2C%201.20.6%2C%201.21.x&show_icons=true&update=1"></a>
+<a href="https://github.com/max1mde/fancy-readme-stats"><img src="https://fancy-readme-stats.vercel.app/api/pin-wide/?username=max1mde&repo=EntitySize&dark_bg=3&height=200&theme=rain&footer=Supported%20versions%3A%201.20.5%2C%201.20.6%2C%201.21.x&show_icons=true&update=1"></a>
   
   <img src="https://imgur.com/yMuZdvu.gif">
   
