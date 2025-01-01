@@ -8,7 +8,7 @@
 <br>
 <br>
 
-![image](https://github.com/user-attachments/assets/8d79fd86-77ef-4f5b-a563-58e8448af5d4)
+<img src="https://github.com/max1mde/EntitySize/assets/114857048/2288ecc1-2ed8-4e8e-814e-d4923d57bb0e">
 
 <br>
 
@@ -133,4 +133,4 @@ modifierService.getEntity(player, range);
 # Support
 https://discord.com/invite/4pA7VUeQs4
 
-<img src="https://github.com/max1mde/EntitySize/assets/114857048/2288ecc1-2ed8-4e8e-814e-d4923d57bb0e">
+![image](https://github.com/user-attachments/assets/8d79fd86-77ef-4f5b-a563-58e8448af5d4)
